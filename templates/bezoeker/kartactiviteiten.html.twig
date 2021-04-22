@@ -6,14 +6,46 @@
     <li><a href="#">contact</a></li>
 {% endblock %}
 {% block content %}
-    <section >
-        <article>
+    <section>
+       <article>
             <h3>Er zijn {{ soortactiviteiten|length }} soorten activiteiten </h3>
-            <ul class="list-group">
-                {% for activiteit in soortactiviteiten %}
-                <li class="list-group-item text-primary">{{ activiteit.naam }}</li>
-                {% endfor %}
-            </ul>
+           <table class="table" style="table-layout: fixed" >
+               <caption>
+                   Dit zijn alle beschikbare activiteiten
+               </caption>
+               <thead>
+               <tr>
+                   <td>naam</td>
+                   <td>beschrijving</td>
+                   <td>prijs</td>
+                   <td>tijdsduur</td>
+                   <td>minimum leeftijd</td>
+               </tr>
+               </thead>
+               <tbody>
+               {% for activiteit in soortactiviteiten %}
+                   <tr>
+                       <td>
+                           {{ activiteit.naam}}
+                       </td>
+                       <td>
+                           {{ activiteit.beschrijving}}
+                       </td>
+
+                       <td>
+                           &euro;{{ activiteit.prijs}}
+                       </td>
+                       <td>
+                          {{ activiteit.tijdsduur}}
+                       </td>
+                       <td>
+                           {{ activiteit.minLeeftijd }}
+                       </td>
+
+                   </tr>
+               {% endfor %}
+               </tbody>
+           </table>
             <p>
                 Let op, voor het karten zijn dichte schoenen verplicht.
                 Karten met een korte broek is niet toegestaan. Wij hebben overalls ter beschikking,

@@ -2,53 +2,51 @@
 
 {% block menu %}
     <li><a href="{{ path('activiteitenoverzicht') }}">home</a></li>
-    <li class="active"><a href="{{ path('beheer') }}"><span class="badge">{{ activiteiten|length }}</span>beheer</a></li>
-    <li><a href="{{ path('admin_soortactiviteit') }}">Soort Activiteiten</a></li>
+    <li><a href="{{ path('beheer') }}"><span class="badge">{{ activiteiten|length }}</span>beheer</a></li>
+    <li class="active"><a href="{{ path('admin_soortactiviteit') }}">Soort Activiteiten</a></li>
     <li><a href="{{ path('deelnemersoverzicht') }}">Deelnemers</a></li>
 {% endblock %}
 {% block content %}
     <section >
         <table class="table" style="table-layout: fixed">
-            <caption>Dit zijn alle activiteiten van het kartcentrum</caption>
+            <caption>Dit zijn alle soort activiteiten van het kartcentrum</caption>
             <thead>
             <tr>
-                <td>datum</td>
-                <td>Tijd</td>
-                <td>soort activiteit</td>
-                <td>deelnemers</td>
-                <td>limiet</td>
-                <td>bewerken</td>
-                <td>verwijderen</td>
+                <td>naam</td>
+                <td>minimale Leeftijd</td>
+                <td>tijdsduur</td>
+                <td>prijs</td>
+                <td>beschrijving</td>
             </tr>
             </thead>
             <tbody>
             {% for activiteit in activiteiten %}
                 <tr>
                     <td>
-                        {{ activiteit.datum|date("d-m-Y")}}
+                        {{ activiteit.naam}}
                     </td>
                     <td>
-                        {{ activiteit.tijd|date("H:i")}}
+                        {{ activiteit.minLeeftijd}}
                     </td>
 
                     <td>
-                        {{ activiteit.soort.naam}}
+                        {{ activiteit.tijdsduur}}
                     </td>
                     <td>
-                        {{ activiteit.users|length}}
+                        {{ activiteit.prijs}}
                     </td>
                     <td>
-                        {{ activiteit.limiet }}
+                        {{ activiteit.beschrijving}}
                     </td>
                     <td title="bewerk de gegevens van deze activiteit">
 
 
-                        <a href="{{ path('update', {'id':activiteit.id}) }}" >
+                        <a href="{{ path('admin_soortactiviteit_update', {'id':activiteit.id}) }}" >
                             <span class="glyphicon glyphicon-pencil" style="color:red"></span>
                         </a>
                     </td>
                     <td title="verwijder deze activiteit is definitief">
-                        <a href="{{ path('delete', {'id':activiteit.id}) }}" >
+                        <a href="{{ path('admin_soortactiviteit_delete', {'id':activiteit.id}) }}" >
                             <span class="glyphicon glyphicon-minus" style="color:red"></span>
                         </a>
                     </td>
@@ -56,7 +54,7 @@
             {% endfor %}
             <tr>
                 <td colspan="6">
-                    <a href="{{ path('add') }}">
+                    <a href="{{ path('admin_soortactiviteit_add') }}">
                         <span class="glyphicon glyphicon-plus" style="color:red"></span>
                     </a>
                 </td>

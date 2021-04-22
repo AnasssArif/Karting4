@@ -13,7 +13,7 @@ class ActiviteitRepository extends \Doctrine\ORM\EntityRepository
     public function getBeschikbareActiviteiten($userid)
     {
         $em=$this->getEntityManager();
-        $query=$em->createQuery("SELECT a FROM App:Activiteit a WHERE :userid NOT MEMBER OF a.users ORDER BY a.datum");
+        $query = $em->createQuery("SELECT a FROM App:Activiteit a WHERE :userid NOT MEMBER OF a.users AND a.datum > CURRENT_DATE() ORDER BY a.datum");
 
         $query->setParameter('userid',$userid);
 

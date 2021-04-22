@@ -25,7 +25,8 @@ class ActiviteitType extends AbstractType
                 'widget'=>'single_text','html5' => false,])
             ->add('soort', EntityType::class,
                 array('class' => 'App:Soortactiviteit',
-                    'choice_label' => 'naam',));
+                    'choice_label' => 'naam',))
+            ->add('limiet', TextType::class);
     }
     public function configureOptions(OptionsResolver $resolver)
     {

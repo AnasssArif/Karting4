@@ -56,6 +56,11 @@ class Activiteit
 
     private $users;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $limiet;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -132,7 +137,29 @@ class Activiteit
 
     public function setSoort($soort)
     {
-        $this->soort=$soort;
+        $this->soort = $soort;
+    }
+
+    public function getBeschikbarePlaatsen(): int
+    {
+        return $this->limiet - count($this->users);
+    }
+
+    public function isMogelijkOmInTeSchrijven(): bool
+    {
+        return $this->getBeschikbarePlaatsen() > 0;
+    }
+
+    public function getLimiet(): ?int
+    {
+        return $this->limiet;
+    }
+
+    public function setLimiet(int $limiet): self
+    {
+        $this->limiet = $limiet;
+
+        return $this;
     }
 }
 
